@@ -8,6 +8,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.mystore.app.exception.ProductNotFoundException;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,5 +18,10 @@ import java.util.Map;
 public class MyGlobalExceptionHandler {
 
     // TODO
+	@ExceptionHandler(ProductNotFoundException.class)
+	public ResponseEntity<String> handleProductNotFoundException(ProductNotFoundException e){
+		return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+		
+	}
 
 }
